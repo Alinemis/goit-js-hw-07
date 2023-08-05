@@ -26,13 +26,30 @@ function createMarkUp(arr) {
 list.insertAdjacentHTML("beforeend", createMarkUp(galleryItems));
 list.addEventListener("click", handlerClick);
 
+let instance;
+
 function handlerClick(evt) {
   evt.preventDefault();
   if (evt.target === evt.currentTarget) {
     return;
   }
-  const currentImg = evt.target.closest(".gallery__image");
+  const currentImg = evt.target.dataset.source;
+  console.log(currentImg);
 
-  const source = currentImg.dataset.source;
-  console.log(source);
+  instance = basicLightbox.create(`
+	<div class="modal">
+    <img src="${currentImg}" alt="">
+    </div>
+`);
+  instance.show();
+}
+
+list.addEventListener("keydown", handlerKey);
+
+function handlerKey(evt) {
+  if (evt.key === "Escape" || evt.key === "Esc") {
+    if (instance) {
+      instance.close();
+    }
+  }
 }
