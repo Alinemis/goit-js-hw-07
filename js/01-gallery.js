@@ -24,3 +24,15 @@ function createMarkUp(arr) {
 }
 
 list.insertAdjacentHTML("beforeend", createMarkUp(galleryItems));
+list.addEventListener("click", handlerClick);
+
+function handlerClick(evt) {
+  evt.preventDefault();
+  if (evt.target === evt.currentTarget) {
+    return;
+  }
+  const currentImg = evt.target.closest(".gallery__image");
+
+  const source = currentImg.dataset.source;
+  console.log(source);
+}
