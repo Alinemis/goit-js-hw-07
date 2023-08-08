@@ -42,14 +42,15 @@ function handlerClick(evt) {
     </div>
 `);
   instance.show();
-}
 
-list.addEventListener("keydown", handlerKey);
+  document.addEventListener("keydown", handlerKey);
+}
 
 function handlerKey(evt) {
   if (evt.key === "Escape" || evt.key === "Esc") {
     if (instance) {
       instance.close();
+      document.removeEventListener("keydown", handlerKey);
     }
   }
 }
